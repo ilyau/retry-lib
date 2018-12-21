@@ -64,3 +64,29 @@ Hello World!
 ```
 npm run tests
 ```
+
+## Other examples
+
+```
+async function methodWithError(parameter) {
+    if (methodWithError.counter < 3) {
+        methodWithError.counter++;
+        throw new Error('Error' + methodWithError.counter);
+    }
+
+    return parameter;
+}
+
+const parameter = 'finish';
+
+// run 50 times with delay 200ms
+const result = await attempt.default(50, 200, (error) => {
+    if (error.message === 'Error3') {
+        // stop attempts
+        return false;
+    } else {
+        // continue execution
+        return true;
+    }
+}, methodWithError, parameter);
+```
