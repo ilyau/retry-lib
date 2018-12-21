@@ -6,7 +6,7 @@ function sleep(time: number): Promise<void> {
   });
 }
 
-export async function attempt(tryCounter: number,
+export default async function attempt(tryCounter: number,
                               sleepTime: number,
                               func: Function,
                               ...params: any[]): Promise<any> {
