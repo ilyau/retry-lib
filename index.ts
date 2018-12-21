@@ -1,3 +1,5 @@
+import {type} from "os";
+
 function sleep(time: number): Promise<void> {
   return new Promise(function (resolve: any) {
     setTimeout(function() {
@@ -6,8 +8,13 @@ function sleep(time: number): Promise<void> {
   });
 }
 
+interface IOnErrorCallback {
+  (error: any): boolean;
+}
+
 export default async function attempt(tryCounter: number,
                               sleepTime: number,
+                              onError: IOnErrorCallback,
                               func: Function,
                               ...params: any[]): Promise<any> {
 
@@ -21,15 +28,23 @@ export default async function attempt(tryCounter: number,
         break;
 
       } catch (e) {
-
-        await sleep(sleepTime);
-
         if (i <= 1) {
           reject(e);
-
           return;
-        }
+        } else {
+          if (typeof onError === 'function') {
+            const r = onError(e);
 
+            if (r) {
+              await sleep(sleepTime);
+            } else {
+              reject(e);
+              return;
+            }
+          } else {
+              await sleep(sleepTime);
+          }
+        }
       }
     }
 

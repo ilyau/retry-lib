@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --reporter spec",
     "build": "tsc"
   },
   "repository": {
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/ilyau/attempt#readme",
   "devDependencies": {
     "@types/node": "^10.12.18",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
     "typescript": "^3.2.2"
   }
 }
