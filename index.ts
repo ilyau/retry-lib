@@ -1,5 +1,3 @@
-import {type} from "os";
-
 function sleep(time: number): Promise<void> {
   return new Promise(function (resolve: any) {
     setTimeout(function() {
