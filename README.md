@@ -1,5 +1,5 @@
 # attempt-async-await
-A Node.js module that 
+A js helper that runs async await function several times with delays until it returns result.
 
 ## Installation 
 ```sh
@@ -58,4 +58,9 @@ console.log(result);
 Output
 ```
 Hello World!
+```
+
+## Tests
+```
+npm run tests
 ```
