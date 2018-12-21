@@ -1,5 +1,5 @@
 function sleep(time: number): Promise<void> {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve: any) {
     setTimeout(function() {
       resolve();
     }, time);
@@ -11,7 +11,7 @@ export default async function attempt(tryCounter: number,
                               func: Function,
                               ...params: any[]): Promise<any> {
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve: any, reject: any) => {
 
     let result = undefined;
 
