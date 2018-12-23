@@ -1,5 +1,5 @@
 # attempt-async-await
-A js helper that runs async await function several times with delays until it returns result.
+A javascript and typescript helper that runs async await function several times with delays until it returns result.
 
 ## Installation 
 ```sh
