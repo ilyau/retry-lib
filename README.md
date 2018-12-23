@@ -60,9 +60,14 @@ Output
 Hello World!
 ```
 
+## Build
+```
+npm run build
+```
+
 ## Tests
 ```
-npm run tests
+npm run test
 ```
 
 ## Other examples
