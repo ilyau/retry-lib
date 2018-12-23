@@ -10,9 +10,9 @@ interface IOnErrorCallback {
   (error: any): boolean;
 }
 
-export default async function attempt(tryCounter: number,
+export async function attempt(tryCounter: number,
                               sleepTime: number,
-                              onError: IOnErrorCallback,
+                              onError: IOnErrorCallback | null | undefined,
                               func: Function,
                               ...params: any[]): Promise<any> {
 
