@@ -85,7 +85,7 @@ async function methodWithError(parameter) {
 const parameter = 'finish';
 
 // run 50 times with delay 200ms
-const result = await attempt.default(50, 200, (error) => {
+const result = await attempt(50, 200, (error) => {
     if (error.message === 'Error3') {
         // stop attempts
         return false;
@@ -94,4 +94,15 @@ const result = await attempt.default(50, 200, (error) => {
         return true;
     }
 }, methodWithError, parameter);
+```
+
+If the method always throw exception the result of the attempt will be undefined.
+
+```
+async function methodWithError(parameter) {
+    throw new Error('Error ' + parameter);
+}
+
+// result === undefined
+const result = await attempt(50, 200, null, methodWithError, 'test');
 ```
