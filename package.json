@@ -1,6 +1,6 @@
 {
   "name": "attempt-async-await",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
