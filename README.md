@@ -1,14 +1,40 @@
-# attempt-async-await
+# retry-js
 A javascript and typescript helper that runs async await function several times with delays until it returns result or attempts ends.
 
 ## Installation 
 ```sh
-npm install attempt-async-await --save
+npm install retry-js --save
 ```
 ## Usage
+
+### TypeScript
+```typescript
+import retry from 'retry-js';
+```
+```sh
+async function methodWithError(parameter: string): Promise<string> {
+
+    if (methodWithError.counter < 3) {
+        methodWithError.counter++;
+        throw new Error('Error');
+    }
+
+    return parameter + ' World!';
+}
+
+methodWithError.counter = 1;
+
+// invokes methodWithError 5 times with delay 200ms between errors
+const result: string = await attempt(5, 200, null, methodWithError, 'Hello');
+console.log(result);
+```
+Output
+```
+Hello World!
+```
 ### Javascript
 ```javascript
-var attempt = require('attempt-async-await');
+var attempt = require('retry-js');
 ```
 
 ```js
@@ -34,31 +60,7 @@ Output
 Hello World!
 ```
 
-### TypeScript
-```typescript
-import { attempt } from 'attempt-async-await';
-```
-```sh
-async function methodWithError(parameter: string): Promise<string> {
 
-    if (methodWithError.counter < 3) {
-        methodWithError.counter++;
-        throw new Error('Error');
-    }
-
-    return parameter + ' World!';
-}
-
-methodWithError.counter = 1;
-
-// invokes methodWithError 5 times with delay 200ms between errors
-const result: string = await attempt(5, 200, null, methodWithError, 'Hello');
-console.log(result);
-```
-Output
-```
-Hello World!
-```
 
 ## Build
 ```

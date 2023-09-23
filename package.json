@@ -1,12 +1,11 @@
 {
-  "name": "attempt-async-await",
-  "version": "1.0.10",
-  "description": "",
+  "name": "retry-js",
+  "version": "1.0.0",
+  "description": "utility for retry operations",
+  "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --reporter spec",
-    "build": "tsc"
+    "build": "rm -rf ./dist && tsc"
   },
   "repository": {
     "type": "git",
@@ -19,9 +18,7 @@
   },
   "homepage": "https://github.com/ilyau/attempt#readme",
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "typescript": "^3.2.2"
+    "@types/node": "^20.6.3",
+    "typescript": "^5.2.2"
   }
 }
