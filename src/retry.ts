@@ -1,5 +1,5 @@
-import { IDefaultRetryParams, IRetryParams } from "./types.js";
-import { sleep } from "./utils.js";
+import { IDefaultRetryParams, IRetryParams } from "./types";
+import { sleep } from "./utils";
 
 export async function retry(params: IRetryParams): Promise<any> {
 

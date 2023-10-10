@@ -1,28 +1,8 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "compilerOptions": {
-      "lib": [
-        "es6"
-      ],
-      "target": "ES6",
-      "module": "NodeNext",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "moduleResolution": "nodenext",
-      "allowUnusedLabels": false,
-      "allowUnreachableCode": false,
-      "noFallthroughCasesInSwitch": true,
-      "noImplicitReturns": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "outDir": "dist",
-      "verbatimModuleSyntax": false
-    },
-    "include": [
-        "src/**/*",
-        "tests/**/*",
-        "index.ts"
-    ]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+      "module": "esnext",
+      "outDir": "dist/esm",
+      "target": "esnext"
   }
+}

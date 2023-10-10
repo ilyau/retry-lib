@@ -10,31 +10,25 @@ npm install retry-js --save
 ### TypeScript
 ```typescript
 import retry from 'retry-js';
-```
-```sh
-async function methodWithError(parameter: string): Promise<string> {
 
-    if (methodWithError.counter < 3) {
-        methodWithError.counter++;
-        throw new Error('Error');
-    }
-
-    return parameter + ' World!';
-}
-
-methodWithError.counter = 1;
-
-// invokes methodWithError 5 times with delay 200ms between errors
-const result: string = await attempt(5, 200, null, methodWithError, 'Hello');
-console.log(result);
+const result = await retry({
+    tryCounter: 3,
+    delayBetweenRetryMs: 200,
+    factor: 2, // second retry after 400ms (2 * 200), third retry after 600ms (3 * 200), and ...
+    func: async () => {
+        return methodWithError('finish1');
+    },
+});
 ```
-Output
-```
-Hello World!
-```
+
 ### Javascript
+
 ```javascript
-var attempt = require('retry-js');
+var retry = require('retry-js'); // you can use commonjs
+// or
+var { default: retry } = require('retry-js');
+// or
+import retry from 'retry-js'; // you can use esm modules
 ```
 
 ```js
@@ -60,51 +54,33 @@ Output
 Hello World!
 ```
 
-
-
-## Build
-```
-npm run build
-```
-
-## Tests
-```
-npm run test
-```
-
 ## Other examples
 
-```js
-async function methodWithError(parameter) {
+```ts
+const methodWithError: any = async (parameter: string) => {
     if (methodWithError.counter < 3) {
         methodWithError.counter++;
         throw new Error('Error' + methodWithError.counter);
     }
 
     return parameter;
+};
+methodWithError.counter = 1;
+
+try {
+
+    const result = await retry({
+        tryCounter: 3,
+        delayBetweenRetryMs: 200,
+        factor: 2,
+        func: () => {
+            return methodWithError('finish1');
+        },
+    });
+    
+    console.log(result);
+
+} catch (e) {
+    console.log(e);
 }
-
-const parameter = 'finish';
-
-// run 50 times with delay 200ms
-const result = await attempt(50, 200, (error) => {
-    if (error.message === 'Error3') {
-        // stop attempts
-        return false;
-    } else {
-        // continue execution
-        return true;
-    }
-}, methodWithError, parameter);
-```
-
-If the method always throw exception the result of the attempt will be the last exception.
-
-```
-async function methodWithError(parameter) {
-    throw new Error('Error ' + parameter);
-}
-
-// the code throws Error and you should resolves that
-const result = await attempt(5, 200, null, methodWithError, 'test');
 ```
