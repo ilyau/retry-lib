@@ -1,12 +1,25 @@
 {
-  "name": "attempt-async-await",
-  "version": "1.0.10",
-  "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "retry-lib",
+  "version": "2.0.2",
+  "description": "lib for retry operations",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "keywords": [
+    "retry",
+    "async",
+    "await",
+    "promise",
+    "retry strategy"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
-    "test": "mocha --reporter spec",
-    "build": "tsc"
+    "build": "rm -rf ./dist && tsc -p tsconfig.json && tsc -p tsconfig.cjs.json && ./moduletype",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,9 +32,11 @@
   },
   "homepage": "https://github.com/ilyau/attempt#readme",
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "typescript": "^3.2.2"
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.6.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
   }
 }
