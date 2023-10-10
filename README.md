@@ -1,15 +1,15 @@
-# retry-js
+# retry-lib
 A javascript and typescript helper that runs async await function several times with delays until it returns result or attempts ends.
 
 ## Installation 
 ```sh
-npm install retry-js --save
+npm install retry-lib --save
 ```
 ## Usage
 
 ### TypeScript
 ```typescript
-import retry from 'retry-js';
+import retry from 'retry-lib';
 
 const result = await retry({
     tryCounter: 3,
@@ -24,11 +24,11 @@ const result = await retry({
 ### Javascript
 
 ```javascript
-var retry = require('retry-js'); // you can use commonjs
+var retry = require('retry-lib'); // you can use commonjs
 // or
-var { default: retry } = require('retry-js');
+var { default: retry } = require('retry-lib');
 // or
-import retry from 'retry-js'; // you can use esm modules
+import retry from 'retry-lib'; // you can use esm modules
 ```
 
 ```js
