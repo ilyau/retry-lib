@@ -7,18 +7,11 @@ npm install retry-lib --save
 ```
 ## Usage
 
+## Import
+
 ### TypeScript
 ```typescript
 import retry from 'retry-lib';
-
-const result = await retry({
-    tryCounter: 3,
-    delayBetweenRetryMs: 200,
-    factor: 2, // second retry after 400ms (2 * 200), third retry after 600ms (3 * 200), and ...
-    func: async () => {
-        return methodWithError('finish1');
-    },
-});
 ```
 
 ### Javascript
@@ -31,33 +24,10 @@ var { default: retry } = require('retry-lib');
 import retry from 'retry-lib'; // you can use esm modules
 ```
 
+## Example
+
 ```js
-async function methodWithError(parameter) {
-
-    if (methodWithError.counter < 3) {
-        methodWithError.counter++;
-        throw new Error('Error');
-    }
-
-    return parameter + ' World!';
-}
-
-methodWithError.counter = 1;
-
-// invokes methodWithError 5 times with delay 200ms between errors
-const result = await attempt.attempt(5, 200, null, methodWithError, 'Hello');
-console.log(result);
-```
-
-Output
-```sh
-Hello World!
-```
-
-## Other examples
-
-```ts
-const methodWithError: any = async (parameter: string) => {
+const methodWithError = async (parameter) => {
     if (methodWithError.counter < 3) {
         methodWithError.counter++;
         throw new Error('Error' + methodWithError.counter);
@@ -67,20 +37,29 @@ const methodWithError: any = async (parameter: string) => {
 };
 methodWithError.counter = 1;
 
-try {
+const result = await retry({
+    tryCounter: 3,
+    delayBetweenRetryMs: 200,
+    factor: 2, // second retry after 400ms (2 * 200), third retry after 600ms (3 * 200), and ...
+    func: async () => {
+        return methodWithError('finish1');
+    },
+});
 
-    const result = await retry({
-        tryCounter: 3,
-        delayBetweenRetryMs: 200,
-        factor: 2,
-        func: () => {
-            return methodWithError('finish1');
-        },
-    });
-    
-    console.log(result);
+console.log(result); // output 'finish1'
+```
 
-} catch (e) {
-    console.log(e);
+## Parameters
+
+```ts
+interface IRetryParams {
+    tryCounter: number;
+    delayBetweenRetryMs: number;
+    factor: number;
+    func: () => Promise<any>;
+    onError?: (error: any): Promise<boolean>;;
 }
+
+export declare function retry(params: IRetryParams): Promise<any>;
+
 ```
